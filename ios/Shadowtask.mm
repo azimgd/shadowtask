@@ -48,7 +48,9 @@ RCT_EXPORT_MODULE()
   dispatch_source_set_event_handler(timer, ^{
     __typeof(self) strongSelf = weakSelf;
     if (strongSelf) {
-      NSMutableDictionary *eventData = [NSMutableDictionary dictionaryWithDictionary:@{}];
+      NSMutableDictionary *eventData = [NSMutableDictionary dictionaryWithDictionary:@{
+        @"taskId": taskId,
+      }];
       [eventData setObject:taskId forKey:@"taskId"];
       [strongSelf emitOnRecurringTaskUpdate:eventData];
     }
@@ -80,7 +82,9 @@ RCT_EXPORT_MODULE()
   dispatch_source_set_event_handler(timer, ^{
     __typeof(self) strongSelf = weakSelf;
     if (strongSelf) {
-      NSMutableDictionary *eventData = [NSMutableDictionary dictionaryWithDictionary:@{}];
+      NSMutableDictionary *eventData = [NSMutableDictionary dictionaryWithDictionary:@{
+        @"taskId": taskId,
+      }];
       [eventData setObject:taskId forKey:@"taskId"];
       [strongSelf emitOnRecurringTaskUpdate:eventData];
 

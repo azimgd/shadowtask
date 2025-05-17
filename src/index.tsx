@@ -1,4 +1,5 @@
 import Shadowtask from './NativeShadowtask';
+import type { RecurringTaskUpdate } from './NativeShadowtask';
 
 export function registerRecurringTask(
   taskId: string,
@@ -23,4 +24,11 @@ export function unregisterRecurringTask(taskId: string): boolean {
   return Shadowtask.unregisterRecurringTask(taskId);
 }
 
-export const onRecurringTaskUpdate = Shadowtask.onRecurringTaskUpdate;
+export function onRecurringTaskUpdate(
+  taskId: string,
+  callback: (payload: RecurringTaskUpdate) => boolean
+) {
+  Shadowtask.onRecurringTaskUpdate((payload) => {
+    if (payload.taskId === taskId) callback(payload);
+  });
+}
