@@ -10,7 +10,6 @@ npm install shadowtask
 
 ## Usage
 
-
 ```js
 import * as shadowtask from 'shadowtask';
 
@@ -20,7 +19,10 @@ useEffect(() => {
   shadowtask.registerRecurringTask('recurringOne', 1000);
   shadowtask.registerRandomRecurringTask('recurringOne', 1000, 2000);
 
-  listenerSubscription.current = shadowtask.onRecurringTaskUpdate((pair) => console.log(`New key added: ${pair.key} with value: ${pair.value}`));
+  listenerSubscription.current = shadowtask.onRecurringTaskUpdate(
+    'recurringOne',
+    (pair) => console.log(`New task: ${pair.taskId}`)
+  );
 
   return  () => {
     shadowtask.unregisterRecurringTask('recurringOne');
@@ -31,7 +33,6 @@ useEffect(() => {
   }
 }, []);
 ```
-
 
 ## Contributing
 

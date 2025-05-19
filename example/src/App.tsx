@@ -9,15 +9,18 @@ export default function App() {
     shadowtask.registerRecurringTask('recurringOne', 1000);
     shadowtask.registerRandomRecurringTask('recurringOne', 1000, 2000);
 
-    listenerSubscription.current = shadowtask.onRecurringTaskUpdate((pair) => console.log(`New key added: ${pair.key} with value: ${pair.value}`));
+    listenerSubscription.current = shadowtask.onRecurringTaskUpdate(
+      'recurringOne',
+      (pair) => console.log(`New task: ${pair.taskId}`)
+    );
 
-    return  () => {
+    return () => {
       shadowtask.unregisterRecurringTask('recurringOne');
       shadowtask.unregisterRecurringTask('recurringTwo');
 
       listenerSubscription.current?.remove();
       listenerSubscription.current = null;
-    }
+    };
   }, []);
 
   return (

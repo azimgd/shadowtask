@@ -26,9 +26,9 @@ export function unregisterRecurringTask(taskId: string): boolean {
 
 export function onRecurringTaskUpdate(
   taskId: string,
-  callback: (payload: RecurringTaskUpdate) => boolean
+  callback: (payload: RecurringTaskUpdate) => void
 ) {
-  Shadowtask.onRecurringTaskUpdate((payload) => {
+  return Shadowtask.onRecurringTaskUpdate((payload) => {
     if (payload.taskId === taskId) callback(payload);
   });
 }
